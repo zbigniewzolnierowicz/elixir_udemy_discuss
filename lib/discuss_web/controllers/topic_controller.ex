@@ -31,11 +31,15 @@ defmodule DiscussWeb.TopicController do
     text conn, "Unimplemented"
   end
 
-  def edit(conn, _params) do
+  def update(conn, %{"id" => id, "topic" => topic}) do
+    IO.inspect(id)
+    IO.inspect(topic)
     text conn, "Unimplemented"
   end
 
-  def update_form(conn, %{"id" => id}) do
-    text conn, id
+  def edit_form(conn, %{"id" => id}) do
+    topic = Repo.get(Topic, id)
+    changeset = Topic.changeset(topic, %{})
+    render conn, "edit.html", topic: topic, changeset: changeset
   end
 end
