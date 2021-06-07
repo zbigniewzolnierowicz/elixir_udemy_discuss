@@ -11,8 +11,12 @@ defmodule DiscussWeb.TopicController do
   def create(conn, %{"topic" => update_data}) do
     changeset = Topic.changeset(%Topic{}, update_data)
     case Repo.insert(changeset) do
-      {:ok, post} -> IO.inspect(post)
-      {:error, changeset} -> render conn, "index.html", changeset: changeset
+      {:ok, _post} ->
+        conn
+        |> put_flash(:info, "You did it! You successfully made this topic!")
+        |> redirect(to: Routes.topic_path(conn, :index))
+      {:error, changeset} ->
+        render conn, "index.html", changeset: changeset
     end
     text conn, "good job"
   end
