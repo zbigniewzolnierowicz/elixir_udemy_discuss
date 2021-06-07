@@ -35,7 +35,7 @@ defmodule DiscussWeb.TopicController do
     text conn, "Unimplemented"
   end
 
-  def update_form(conn, _params) do
-    text conn, "Unimplemented"
+  def update_form(conn, %{"id" => id}) do
+    text conn, id
   end
 end

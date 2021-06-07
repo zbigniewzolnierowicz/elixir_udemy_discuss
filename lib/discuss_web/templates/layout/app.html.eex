@@ -10,14 +10,13 @@
     <title>Hello Discuss!</title>
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   </head>
 
   <body>
     <nav class="light-blue">
       <div class="nav-wrapper container">
-        <a href="/" class="brand-logo">
-          Discussions
-        </a>
+        <%= link "Discussions", to: "/topic", class: "brand-logo" %>
       </div>
     </nav>
 
