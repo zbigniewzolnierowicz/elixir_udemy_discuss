@@ -1,5 +1,6 @@
 defmodule DiscussWeb.TopicController do
   use DiscussWeb, :controller
+  import Ecto.Query, only: [from: 2]
   alias Discuss.Topic
   alias Discuss.Repo
 
@@ -22,8 +23,7 @@ defmodule DiscussWeb.TopicController do
   end
 
   def index(conn, _params) do
-    topics = Repo.all(Topic)
-
+    topics = Repo.all(from t in Topic, select: [t.id, t.title], order_by: [t.id])
     render(conn, "topics.html", topics: topics)
   end
 
