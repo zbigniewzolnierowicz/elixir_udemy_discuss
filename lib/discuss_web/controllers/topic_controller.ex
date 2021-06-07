@@ -18,13 +18,9 @@ defmodule DiscussWeb.TopicController do
   end
 
   def index(conn, _params) do
-    data =
-      for topic <- Repo.all(Topic) do
-        Map.take(topic, [:id, :title])
-      end
+    topics = Repo.all(Topic)
 
-    IO.inspect(data)
-    json conn, %{topics: data}
+    render(conn, "topics.html", topics: topics)
   end
 
   def delete(conn, _params) do
