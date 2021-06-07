@@ -31,10 +31,18 @@ defmodule DiscussWeb.TopicController do
     text conn, "Unimplemented"
   end
 
-  def update(conn, %{"id" => id, "topic" => topic}) do
-    IO.inspect(id)
-    IO.inspect(topic)
-    text conn, "Unimplemented"
+  def update(conn, %{"id" => id, "topic" => params}) do
+    topic = Repo.get(Topic, id)
+    changeset = Topic.changeset(topic, params)
+
+    case Repo.update(changeset) do
+      {:ok, post} ->
+        conn
+        |> put_flash(:info, "You successfully edited the post with ID #{post.id}")
+        |> redirect(to: Routes.topic_path(conn, :index))
+      {:error, changeset} ->
+        render conn, "edit.html", topic: topic, changeset: changeset
+    end
   end
 
   def edit_form(conn, %{"id" => id}) do
