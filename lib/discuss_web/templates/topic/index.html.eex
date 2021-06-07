@@ -1,8 +1,14 @@
-<%= form_for @changeset, Routes.topic_path(@conn, :create), fn f -> %>
-  <div class="form-group">
-    <%= text_input f, :title, placeholder: "Title", class: "form-control" %>
-    <%= error_tag f, :title %>
-  </div>
+<h1>Topics</h1>
+<ul class="collection">
+    <%= for topic <- @topics do %>
+        <li class="collection-item">
+            <%= topic.title %>
+        </li>
+    <% end %>
+</ul>
 
-  <%= submit "Save Topic", class: "btn btn-primary" %>
-<% end %>
+<div class="fixed-action-btn">
+    <%= link to: Routes.topic_path(@conn, :new_form), class: "btn-floating btn-large waves-effect waves-light red" do %>
+      <i class="material-icons">add</i>
+    <% end %>
+</div>

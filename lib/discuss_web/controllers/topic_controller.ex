@@ -19,7 +19,7 @@ defmodule DiscussWeb.TopicController do
         |> redirect(to: Routes.topic_path(conn, :index))
 
       {:error, changeset} ->
-        render(conn, "index.html", changeset: changeset)
+        render(conn, "new.html", changeset: changeset)
     end
 
     text(conn, "good job")
@@ -33,7 +33,7 @@ defmodule DiscussWeb.TopicController do
           order_by: [t.id]
       )
 
-    render(conn, "topics.html", topics: topics)
+    render(conn, "index.html", topics: topics)
   end
 
   def delete(conn, _params) do
