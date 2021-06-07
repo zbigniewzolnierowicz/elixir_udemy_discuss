@@ -4,9 +4,9 @@ defmodule DiscussWeb.TopicController do
   alias Discuss.Topic
   alias Discuss.Repo
 
-  def new_form(conn, params) do
+  def new(conn, params) do
     changeset = Topic.changeset(%Topic{}, params)
-    render(conn, "index.html", changeset: changeset)
+    render(conn, "new.html", changeset: changeset)
   end
 
   def create(conn, %{"topic" => update_data}) do
@@ -36,8 +36,11 @@ defmodule DiscussWeb.TopicController do
     render(conn, "index.html", topics: topics)
   end
 
-  def delete(conn, _params) do
-    text(conn, "Unimplemented")
+  def delete(conn, %{"id" => id}) do
+    Repo.get!(Topic, id) |> Repo.delete!()
+    conn
+    |> put_flash(:info, "Post with the ID of (#{id}) was successfully deleted.")
+    |> redirect(to: Routes.topic_path(conn, :index))
   end
 
   def update(conn, %{"id" => id, "topic" => params}) do
@@ -55,7 +58,7 @@ defmodule DiscussWeb.TopicController do
     end
   end
 
-  def edit_form(conn, %{"id" => id}) do
+  def edit(conn, %{"id" => id}) do
     topic = Repo.get(Topic, id)
     changeset = Topic.changeset(topic, %{})
     render(conn, "edit.html", topic: topic, changeset: changeset)
