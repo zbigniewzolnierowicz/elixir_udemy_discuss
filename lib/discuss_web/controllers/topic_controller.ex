@@ -23,7 +23,11 @@ defmodule DiscussWeb.TopicController do
   end
 
   def index(conn, _params) do
-    topics = Repo.all(from t in Topic, select: [t.id, t.title], order_by: [t.id])
+    topics = Repo.all(
+      from t in Topic,
+        select: %Topic{id: t.id, title: t.title},
+        order_by: [t.id]
+    )
     render(conn, "topics.html", topics: topics)
   end
 
