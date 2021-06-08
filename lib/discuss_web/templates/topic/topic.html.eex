@@ -1,2 +1,8 @@
 <h1><%= @topic.title %></h1>
 <h2>Comments</h2>
+<button id="ping" class="btn btn-primary">Ping!</button>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        window.createChannel(<%= @topic.id %>)
+    })
+</script>
