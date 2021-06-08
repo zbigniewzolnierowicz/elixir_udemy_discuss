@@ -12,7 +12,7 @@ config :discuss,
 
 # Configures the endpoint
 config :discuss, DiscussWeb.Endpoint,
-  url: [host: "localhost"],
+  url: [host: "0.0.0.0"],
   secret_key_base: "UkNVQ8svOEwmAsS4D6NQ67CNXGt7A/QE1T4cSKWCaeRZDjZzMT4O+/brQ/0rrqHM",
   render_errors: [view: DiscussWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: Discuss.PubSub,
