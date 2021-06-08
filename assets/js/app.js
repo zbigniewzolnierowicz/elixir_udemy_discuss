@@ -1,2 +1,3 @@
 import "phoenix_html"
-import "./socket"
+import { Socket } from "phoenix"
+import socket from "./socket"
