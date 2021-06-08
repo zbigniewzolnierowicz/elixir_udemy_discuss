@@ -32,7 +32,7 @@ defmodule DiscussWeb.TopicController do
           select: %Topic{id: t.id, title: t.title},
           order_by: [t.id]
       )
-    IO.puts "ID: #{System.get_env("GITHUB_CLIENT_ID")}"
+    IO.inspect conn.assigns.user
     render(conn, "index.html", topics: topics)
   end
 

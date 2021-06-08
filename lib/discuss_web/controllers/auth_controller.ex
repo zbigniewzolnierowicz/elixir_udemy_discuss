@@ -34,4 +34,11 @@ defmodule DiscussWeb.AuthController do
         {:ok, user}
     end
   end
+
+  def signout(conn, _params) do
+    conn
+    |> configure_session(drop: true)
+    |> put_flash(:info, "You were logged out.")
+    |> redirect(to: Routes.topic_path(conn, :index))
+  end
 end
