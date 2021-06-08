@@ -5,6 +5,7 @@ defmodule Discuss.Topic do
   @derive {Jason.Encoder, only: [:id, :title]}
   schema "topics" do
     field :title, :string
+    belongs_to :user, Discuss.User
   end
 
   def changeset(struct, params \\ %{}) do
