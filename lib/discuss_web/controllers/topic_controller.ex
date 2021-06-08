@@ -4,6 +4,8 @@ defmodule DiscussWeb.TopicController do
   alias Discuss.Topic
   alias Discuss.Repo
 
+  plug DiscussWeb.Plugs.RequireLoggedIn when action in [:new, :create, :edit, :update, :delete]
+
   def new(conn, params) do
     changeset = Topic.changeset(%Topic{}, params)
     render(conn, "new.html", changeset: changeset)

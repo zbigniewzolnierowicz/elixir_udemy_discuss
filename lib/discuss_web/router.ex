@@ -17,7 +17,6 @@ defmodule DiscussWeb.Router do
   scope "/topics", DiscussWeb do
     pipe_through :browser
     resources "/", TopicController
-    get "/:id/delete", TopicController, :delete_form
   end
 
   scope "/auth", DiscussWeb do

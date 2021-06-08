@@ -1,5 +1,6 @@
 defmodule DiscussWeb.Plugs.RequireLoggedIn do
   import Plug.Conn
+  import Phoenix.Controller
   alias Discuss.Repo
   alias Discuss.User
   alias DiscussWeb.Router.Helpers, as: Routes
@@ -8,9 +9,8 @@ defmodule DiscussWeb.Plugs.RequireLoggedIn do
   def init(_params) do
   end
 
-  @spec call(%Plug.Conn, any) :: %Plug.Conn
   def call(conn, _params) do
-    if conn.assigns[:user_id] do
+    if conn.assigns[:user] do
       conn
     else
       conn
