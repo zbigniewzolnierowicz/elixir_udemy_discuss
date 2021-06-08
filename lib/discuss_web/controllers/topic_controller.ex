@@ -32,7 +32,6 @@ defmodule DiscussWeb.TopicController do
           select: %Topic{id: t.id, title: t.title},
           order_by: [t.id]
       )
-    IO.inspect conn.assigns.user
     render(conn, "index.html", topics: topics)
   end
 
