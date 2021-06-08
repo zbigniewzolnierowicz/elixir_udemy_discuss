@@ -64,6 +64,12 @@ defmodule DiscussWeb.TopicController do
     render(conn, "edit.html", topic: topic, changeset: changeset)
   end
 
+  def show(conn, %{"id" => topic_id}) do
+    topic = Repo.get!(Topic, topic_id)
+
+    render conn, "topic.html", topic: topic
+  end
+
   def require_topic_owner(conn, _params) do
     %{params: %{"id" => topic_id}} = conn
 
