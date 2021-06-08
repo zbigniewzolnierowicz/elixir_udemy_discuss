@@ -5,6 +5,7 @@ defmodule DiscussWeb.TopicController do
   alias Discuss.Repo
 
   plug DiscussWeb.Plugs.RequireLoggedIn when action in [:new, :create, :edit, :update, :delete]
+  plug :require_topic_owner when action in [:edit, :update, :delete]
 
   def new(conn, params) do
     changeset = Topic.changeset(%Topic{}, params)
@@ -61,5 +62,18 @@ defmodule DiscussWeb.TopicController do
     topic = Repo.get(Topic, id)
     changeset = Topic.changeset(topic, %{})
     render(conn, "edit.html", topic: topic, changeset: changeset)
+  end
+
+  def require_topic_owner(conn, _params) do
+    %{params: %{"id" => topic_id}} = conn
+
+    if Repo.get(Topic, topic_id).user_id == conn.assigns.user.id do
+      conn
+    else
+      conn
+      |> put_flash(:error, "You're not the owner of this topic.")
+      |> redirect(to: Routes.topic_path(conn, :index))
+      |> halt()
+    end
   end
 end
